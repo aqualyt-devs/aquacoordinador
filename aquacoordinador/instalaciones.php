@@ -12,11 +12,26 @@
     <title>Aqualyt - Coordinador</title>
     <?php include 'styles.php';?>
     <style>
-     .infoPS{
-        margin-top: 8px;
-       /*background-color: blue;*/
-     }
-     
+    .infoPS{
+        margin-top: 5px;
+       /* background-color: blue; */
+    }
+    #editarOperarioBtn_{
+        margin-top: 0;
+        margin-bottom: 36px;
+    }
+    .modal{
+         width: 50%;
+    }
+    .modal-footer,.modal-content{
+        display: flex;
+        justify-content: center;
+    }
+    .centered{
+        display:flex;
+        justify-content:center;
+    }
+ 
     </style>
 </head>
 
@@ -318,6 +333,14 @@
         usort($listDesplegables['EQUIPO'], 'cmp');
     }
     //
+    $desplegableOperarios = getContent($urlAPI."/equipos/equipo/listado");
+    if ($desplegableOperarios->codigo == 100) {
+        $listDesplegables['OPERARIOS'] = array();
+        foreach ($desplegableOperarios->contenido as $operario) {
+            array_push($listDesplegables['OPERARIOS'], array('id'=>$operario->id, 'value'=>$operario->nombre." ".$operario->apellido1));
+        }
+        usort($listDesplegables['OPERARIOS'], 'cmp');
+    }
 
     $ofertasLugarGet = getContent($urlAPI."/equipos/ofertas_contratos/lugar/".$idLloc);
     if (isset($ofertasLugarGet->codigo) && ($ofertasLugarGet->codigo == 100)) {
@@ -1146,73 +1169,94 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s6">
+            <div class="col m6">
                 <h5>Información de la PS</h5>
                 <div class="card z-depth-2">
                     <div class="card-content">
                         <div class="row">
-                            <div class="col s2">
+                            <div class="col">
                                 <strong>Dirección:</strong>
                             </div>
-                            <div class="col s10"><?php echo $infoPS->direccion; ?>, <?php echo $infoPS->poblacion; ?>, <?php echo $infoPS->provincia; ?></div>
+                            <div class="col">
+                                <?php echo $infoPS->direccion; ?>, <?php echo $infoPS->poblacion; ?>, <?php echo $infoPS->provincia; ?>
+                            </div>
                         </div>
 
                         <div class="row">
 
-                            <div class="col s2 infoPS">
+                            <div class="col infoPS">
                                 <strong>Estado:</strong>
                             </div>
-                            <div class="col s4"><?php echo $infoPS->estado_string.' <a href="#editarEstado" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn"><i class="material-icons">edit</i>editar</a>'; ?></div>
-                            
-                            <div class="col s2 infoPS">
+                            <div class="col">
+                                <?php echo $infoPS->estado_string.' <a href="#editarEstado" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn"><i class="material-icons">edit</i>editar</a>'; ?>
+                            </div>
+                            <div class="col infoPS">
                                 <strong>Naturaleza:</strong>
                             </div>
-                            <div class="col s4 accionesBtns">
-                            <?php echo $infoPS->naturaleza_string.' <a href="#editarNaturaleza" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn"><i class="material-icons">edit</i>editar</a>'; ?></div>
-                            
+                            <div class="col editarBtn">
+                                <?php echo $infoPS->naturaleza_string.' <a href="#editarNaturaleza" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn"><i class="material-icons">edit</i>editar</a>'; ?>
+                            </div>
                             
                         </div>
 
                         <div class="row">
-                        <div class="col s2">
+                            <div class="col infoPS">
                                 <strong>Tipo:</strong>
                             </div>
-                            <div class="col s4"><?php echo $infoPS->tipo_string; ?></div>
+                            <div class="col infoPS">
+                                <?php echo $infoPS->tipo_string; ?>
+                            </div>
                            
-                            <div class="col s2 infoPS">
+                            <div class="col infoPS">
                                 <strong>Urgencia:</strong>
                             </div>
                             
-                            <div class="col s4 accionesBtns"><?php echo $infoPS->urgencia_string.
-                            ' <a href="#editarUrgencia" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn"><i class="material-icons">edit</i>editar</a>'; ?>
+                            <div class="col infoPS">
+                                <span>
+                                    <?php echo $infoPS->urgencia_string; ?>
+                                </span>
+                            </div>
+                            <div class="col accionesBtns"> 
+                                <a  href="#editarUrgencia" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn">
+                                    <i class="material-icons">edit</i>
+                                    editar
+                                </a>
                             </div>
                         </div>
 
                         <div class="row">
                         
-                        <div class="col s2">
+                            <div class="col">
                                 <strong>Cliente:</strong>
                             </div>
-                            <div class="col s4"><?php echo $infoPS->cliente_nombre; ?></div>
-                            <div class="col s2">
+                            <div class="col">
+                                <?php echo $infoPS->cliente_nombre; ?>
+                            </div>
+                            <div class="col">
                                 <strong>Agente:</strong>
                             </div>
-                            <div class="col s4"><?php echo $infoPS->agente_nombre; ?></div>
+                            <div class="col">
+                                <?php echo $infoPS->agente_nombre; ?>
+                            </div>
+
                         </div>
 
                         <div class="row">
-                        <div class="col s2">
+
+                            <div class="col">
                                 <strong>Solicitante:</strong>
                             </div>
-                            <div class="col s4"><?php echo $infoPS->solicitante_nombre; ?></div>
+                            <div class="col">
+                                <?php echo $infoPS->solicitante_nombre; ?>
+                            </div>
+
                         </div>
-                            
-                            
-                
+                        
                     </div>
+                        
                 </div>
             </div>
-            <div class="col s6">
+            <div class="col m6">
                 <h5>Equipo</h5>
                 <div class="card z-depth-2">
                     <div class="card-content">
@@ -1238,17 +1282,19 @@
                             <div class="col s2 infoPS">
                                 <strong>Operarios:</strong>
                             </div>
-                            <div class="col infoPS"><?php 
+                            <div class="col infoPS">
+                                <?php 
                                 $arrayComponentes = array();
                                 foreach ($infoPS->componentes as $componente) {
                                     array_push($arrayComponentes, $componente->NOMBRE);
                                 }
                                 echo join(', ', $arrayComponentes); 
-                                ?></div>
+                                ?>
+                            </div>
                                 
-                           <!-- <div class="col accionesBtns">
-                            <a href="#editarComponentes" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn">
-                            <i class="material-icons">edit</i>editar</a> -->
+                            <div class="col accionesBtns">
+                                <a href="#editarOperario" class="modal-trigger waves-effect waves-teal btn-flat btn-small actionBtn">
+                                <i class="material-icons">edit</i>editar</a> 
                             
                             </div>
                         </div>
@@ -1869,9 +1915,11 @@
     </div>
     <div id="editarUrgencia" class="modal">
         <div class="modal-content">
-            <h4>Modificar la urgencia de la PS</h4>
-            <div class="row">
-                <div class="col s6">
+            <div class="row">   
+                <div class="col s12 centered">
+                    <h4>Modificar la urgencia de la PS</h4>
+                </div>
+                <div class="col s12 centered">
                     <?php echo mountSelect('URGENCIA', $infoPS->urgencia_id, 'Urgencia', $listDesplegables, $infoPS->id); ?>
                 </div>
             </div>
@@ -1883,23 +1931,27 @@
     </div>
     <div id="editarEstado" class="modal">
         <div class="modal-content">
-            <h4>Modificar el estado de la PS</h4>
-            <div class="row">
-                <div class="col s6">
+           <div class="row ">
+                <div class="col s12 centered">
+                    <h4>Modificar el estado de la PS</h4>
+                </div>
+                <div class="col s12 centered">
                     <?php echo mountSelect('ESTADO', $infoPS->estado_id, 'Estado', $listDesplegables, $infoPS->id); ?>
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer col s12">
             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cerrar</a>
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn" id="editarEstadoBtn" idPS="<?php echo $idPS; ?>">Modificar</a>
         </div>
     </div>
     <div id="editarNaturaleza" class="modal">
         <div class="modal-content">
-            <h4>Modificar la naturaleza de la PS</h4>
             <div class="row">
-                <div class="col s6">
+                <div class="col s12 centered">
+                    <h4>Modificar la naturaleza de la PS</h4>
+                </div>
+                <div class="col s12 centered">
                     <?php echo mountSelect('NATURALEZA', $infoPS->naturaleza_id, 'Naturaleza', $listDesplegables, $infoPS->id); ?>
                 </div>
             </div>
@@ -1910,11 +1962,13 @@
         </div>
     </div>
 
-    <div id="editarEquipo" class="modal">
+    <div id="editarEquipo" class="modal display-flex">
         <div class="modal-content">
-            <h4>Modificar el Equipo</h4>
             <div class="row">
-                <div class="col s6">
+                <div class="col s12 centered">
+                    <h4>Modificar el Equipo</h4>
+                </div>
+                <div class="col s12 centered">
                     <?php echo mountSelect('EQUIPO', $infoPS->equipo_id, 'Equipo', $listDesplegables, $infoPS->id); ?>
                 </div>
             </div>
@@ -1926,18 +1980,33 @@
     </div>
 
 
-    <div id="editarComponentes" class="modal">
+    <div id="editarOperario" class="modal">
         <div class="modal-content">
-            <h4>Modificar Componentes del Equipo</h4>
             <div class="row">
-                <div class="col s6">
-                    <?php echo mountSelect('EMPLEADO', $infoPS->empleado_id, 'Estado', $listDesplegables, $infoPS->id); ?>
+                <div class="col s12 centered">
+                    <h4>Modificar Operarios del Equipo</h4>
+                </div>
+                <div class="col s12 centered">
+                    <?php
+                    // function mountSelect($tipo, $valor, $label, $listOptions, $idInstalacion){
+                    $count=0;
+                    foreach ($infoPS->componentes AS $operario) {
+                        echo "<div style='display: inline-block;'>";
+                            echo mountSelect('OPERARIOS', $operario->ID, $operario->NOMBRE, $listDesplegables, $operario->ID);
+                           echo '<a id="editarOperarioBtn'.$count.'" href="#!" style="display:none;" class="modal-action waves-effect waves-green btn" idPS="'.$idPS.'" idOperario="'.$operario->ID.'">Modificar</a>';
+                           //echo '<a id="editarOperarioBtn" href="#!" class="modal-action waves-effect waves-green btn" idPS="'.$idPS.'" idOperario="'.$operario->ID.'">Modificar</a>';
+                           echo "</div>";
+                        echo "<div id='callback_".$operario->ID."' style='display:inline-block;'></div>";
+                       $count++;
+                    }
+//                    echo mountSelect('EMPLEADO', $infoPS->empleado_id, 'Estado', $listDesplegables, $infoPS->id); 
+                    ?>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cerrar</a>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn" id="editarComponenteBtn" idPS="<?php echo $idPS; ?>">Modificar</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn" cantidad_botones="<?php echo $count; ?>" id="guardarCambiosOperarios">Guardar</a>
         </div>
     </div>
 
@@ -2045,8 +2114,27 @@
         echo isset($modalsMantenimientoInstalaciones)?str_replace("None","",$modalsMantenimientoInstalaciones):'';
 
         include 'scripts.php';
-    } 
+    }
+
+
+echo "<script>";
+for($counter=0; $counter<=$count; $counter++) {
     ?>
+    $("#editarOperario").on("click", "#editarOperarioBtn<?php echo $counter; ?>", function (a) {
+        var i1 = $(this).attr("idOperario"),
+            a = $(this).attr("idPS"),
+            i2 = $("#OPERARIOS" + i1).val();
+        
+        editarOperarioPS(a, i1, i2);
+    })
+    <?php
+    if ($counter<$count) {
+        echo ",";
+    }
+}
+
+echo "</script>";
+?>
 </body>
 
 </html>
