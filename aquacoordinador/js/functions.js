@@ -597,6 +597,20 @@ function editarEquipoPS(a, i) {
     );
 }
 
+function editarOperarioPS(a, i1, i2) {
+    var e = { idPS: a, idOperario_antiguo: i1, idOperario_nuevo : i2 };
+    //  URLAPI + "/equipos/equipo/" + i + "/update/ps/" + a
+    $.post(
+        URLAPI + "/equipos/replace_operario/ps/" + a + "/operario_antiguo/" + i1 + "/operario_nuevo/" + i2,
+        e,
+        function (a) {
+            200 == a.codigo ? Materialize.toast(a.detalles, 4e3) : 100 == a.codigo && Materialize.toast("Operario de Equipo de PS cambiado correctamente", 2e3, "");
+        },
+        "json"
+    );
+    document.getElementById("callback_" + i1).innerHTML = '<p style="color:green; font-weight:bold;"><span>&#10003;</span> Modificado correctamente!</p>';
+    document.getElementById("callback_" + i1).style.marginBottom = "50px";
+}
 
 function editarNaturalezaPS(a, i) {
     var e = { idPS: a, idNaturaleza: i };
@@ -1291,6 +1305,33 @@ var PSAsignado,
                     e = $("#ESTADO" + i).val();
                 editarEstadoPS(i, e);
             }),
+          /*$("#editarOperario").on("click", "#editarOperarioBtn", function (a) {
+                var i1 = $(this).attr("idOperario"),
+                    a = $(this).attr("idPS"),
+                    i2 = $("#OPERARIOS" + i1).val();
+                
+                editarOperarioPS(a, i1, i2);
+            }),*/
+
+        
+         $("#editarOperario").on("click", "#guardarCambiosOperarios", function (a) {
+                var i = $(this).attr("cantidad_botones");
+                let e;
+                console.log()
+                for (e=0; e<=i; e++) {
+                    $("#editarOperarioBtn" + e).click()
+                }
+              // location.reload(!0);3
+                setTimeout(
+                    function(){ location.reload(!0); },
+                    1000
+                );
+           }),
+           
+
+
+
+
             $("#editarEquipo").on("click", "#editarEquipoBtn", function (a) {
                 var i = $(this).attr("idPS"),
                     e = $("#EQUIPO" + i).val();

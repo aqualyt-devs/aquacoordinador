@@ -73,7 +73,10 @@ main {
 .modal {
     max-height: 80%;
     width: 80%;
+    overflow: visible;
+   
 }
+
 
 .equipoPre {
     font-size: 1.5rem;
@@ -207,11 +210,6 @@ main {
     background-color: #f44336 !important;
 }
 
-.modal {
-    overflow: visible;
-    /* overflow-y: auto; */
-}
-
 .instalacionItemEye {
     color: #9e9e9e;
 }
@@ -220,9 +218,12 @@ main {
     color: #26a69a;
 }
 
-/*.accionesBtns a {
+.accionesBtns a {
     padding: 0;
-}*/
+}
+.editarBtn{
+    margin-top: -10px;
+}
 
 .modalInstalaciones {
     overflow: auto !important;
