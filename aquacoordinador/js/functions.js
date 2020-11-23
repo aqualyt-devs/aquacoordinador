@@ -779,7 +779,8 @@ var PSAsignado,
     litros_agua = null,
     idEquipo = null,
     PSActuales = 0,
-    URLAPI = "http://app.aqualyt.net:5002",
+    URLAPI = "http://app.aqualyt.net:5002", // PROD
+    // URLAPI = "http://192.168.150.112:5002", // DEV
     fecha = moment().format("DD[/]MM[/]YYYY"),
     fecha2 = moment().format("DD[/]MM[/]YYYY"),
     hoy = new Date(moment().format("YYYY[,]MM[,]DD")),

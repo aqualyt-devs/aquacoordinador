@@ -1497,7 +1497,7 @@
                 <div class="col s12">
                     <h5>Atributos del lugar de actuación</h5>
                     <div class="card z-depth-2">
-                        <table class="highlight centered">
+                        <table class="highlight">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -1529,7 +1529,7 @@
                 <div class="col s12">
                     <h5>MODIFICACIÓN INSTALACIONES EXISTENTES (<?php echo "$countInstalacionesRevision/$countInstalaciones"; ?>)</h5>
                     <div class="card z-depth-2">
-                        <table class="highlight centered">
+                        <table class="highlight">
                             <thead>
                             <tr>
                                 <th>RANGO</th>
@@ -1568,7 +1568,7 @@
                 <div class="col s12">
                     <h5>INSTALACIONES NUEVAS(<?php echo "$countInstalacionesNuevas"; ?>)</h5>
                     <div class="card z-depth-2">
-                        <table class="highlight centered">
+                        <table class="highlight">
                             <thead>
                             <tr>
                                 <th>RANGO</th>
