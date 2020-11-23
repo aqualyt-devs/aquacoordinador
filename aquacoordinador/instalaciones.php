@@ -51,7 +51,7 @@
     define("PREIMAGE", "data:image/png;base64,");
     define("ESTILOSMODIFICACION", "yellow lighten-4");
     define("AQUAACTION", "http://app.aqualyt.net/sf/action.php"); // PRO
-    //define("AQUAACTION", "http://aquaplus.shadowsland.com/sf/action.php"); // DEV
+    // define("AQUAACTION", "http://aquaplus.shadowsland.com/sf/action.php"); // DEV
 
     // para debug:
     function codeOut($object){
