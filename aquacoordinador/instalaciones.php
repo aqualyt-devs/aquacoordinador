@@ -1568,7 +1568,7 @@
                 <div class="col s12">
                     <h5>INSTALACIONES NUEVAS(<?php echo "$countInstalacionesNuevas"; ?>)</h5>
                     <div class="card z-depth-2">
-                        <table class="highlight">
+                        <table class="highlighttabla">
                             <thead>
                             <tr>
                                 <th>RANGO</th>
@@ -1725,7 +1725,7 @@
                                                         $rechazarHide = '';
                                                         break;
                                                 }
-                                                echo '<div class="col s4">
+                                                echo '<div class="col s12">
                                                         <div class="col s12">
                                                         <div class="card">
                                                         <div class="card-action accionesImg'.$imagenPS[0]->id.' accionesInst'.$key.'" idEstadoValidacion="'.$imagenPS[0]->idEstadoValidacion.'">
@@ -1760,7 +1760,7 @@
                                                         $rechazarHide = '';
                                                         break;
                                                 }
-                                                echo '<div class="col s4">
+                                                echo '<div class="col s12">
                                                         <div class="col s12">
                                                         <div class="card">
                                                         <div class="card-action accionesImg'.$imagenPS[1]->id.' accionesInst'.$key.'" idEstadoValidacion="'.$imagenPS[1]->idEstadoValidacion.'">
@@ -1795,7 +1795,7 @@
                                                         $rechazarHide = '';
                                                         break;
                                                 }
-                                                echo '<div class="col s4">
+                                                echo '<div class="col s12">
                                                         <div class="col s12">
                                                         <div class="card">
                                                         <div class="card-action accionesImg'.$imagenPS[2]->id.' accionesInst'.$key.'" idEstadoValidacion="'.$imagenPS[2]->idEstadoValidacion.'">
@@ -1837,8 +1837,8 @@
                                 <div class="col s12">
                                     <div class="row">';
                                     if(isset($imagenPortada[0]->new)) {
-                                        echo '<div class="col s6">
-                                            <div class="col s10">
+                                        echo '<div class="col s12">
+                                                <div class="col s12">
                                                         <div class="card">
                                                         <div class="card-action accionesImg'.$imagenPortada[0]->id.'">
                                                             <a href="#" class="text-green validarFotoPortada" idDocumento="'.$imagenPortada[0]->id.'" idInstalacion="'.$key.'">Validar</a>
@@ -1853,8 +1853,8 @@
                                             </div>';
                                     }
                                     if(isset($imagenPortada[1]->old)) {
-                                        echo '<div class="col s6">
-                                        <div class="col s10">
+                                        echo '<div class="col s12">
+                                        <div class="col s12">
                                                     <div class="card">
                                                         <div class="card-image">
                                                             <img class="materialboxed" src="'.$imagenPortada[1]->old.'">
