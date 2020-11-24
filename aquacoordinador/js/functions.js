@@ -101,10 +101,10 @@ function loadTareasList(a) {
                           '<li class="collection-item itemTarea estadoPS' +
                               i.naturaleza_id +
                               '" id="' +
-                              i.id +
-                              '"><div class="row"><div class="col s1">ID: ' +
-                              i.id +
-                              '</div><div class="col s1"><b>Emisor:</b><br />' +
+                              i.id + // <div class="col s1">ID: 
+                              '"><div class="row">' +
+                             // i.id + </div>
+                              '<div class="col s1"><b>Emisor:</b><br />' +
                               i.emisor_nombre +
                               "<br /><b>Receptor:</b><br />" +
                               i.receptor_nombre +
@@ -146,13 +146,13 @@ function loadTareasList(a) {
                               $("#tareasList .collection").append(
                                   '<li class="collection-item itemSubtarea' +
                                       i.id +
-                                      '" style="display:none;"><div class="row"><div class="col s1">Autor: ' +
+                                      '" style="display:none; background-color:#f1f1f1;"><div class="row"><div class="col s1">Autor: ' +
                                       e.emisor_nombre +
                                       '</div><div class="col s1">Fecha:<br />' +
                                       moment(e.fecha, "YYYY-MM-DD").format("DD/MM/YYYY") +
-                                      '</div><div class="col s10">Descripción: ' +
+                                      '</div><div class="col s8">Descripción: ' +
                                       e.descripcion +
-                                      "</div></div></li>"
+                                      '</div><div class="col s2"><a href="#" class="btn btn-info" role="button">Editar</a><a href="#" class="btn btn-info" role="button">Guardar</a></div></div></li>'
                               );
                           }),
                           $("#tareasList .collection").append(
@@ -166,7 +166,7 @@ function loadTareasList(a) {
                                   i.receptor_id +
                                   '" prioridadTarea="' +
                                   i.prioridad_id +
-                                  '" style="display:none;"><div class="row"><div class="col s2 input-field personalSelectColumn' +
+                                  '" style="display:none; background-color:#f1f1f1"><div class="row"><div class="col s2 input-field personalSelectColumn' +
                                   i.id +
                                   '"><select id="personalSelect' +
                                   i.id +
@@ -174,11 +174,11 @@ function loadTareasList(a) {
                                   i.id +
                                   '"><option value="" disabled selected>Selecciona prioridad</option></select><select id="naturalezaSelect' +
                                   i.id +
-                                  '"><option value="" disabled selected>Selecciona naturaleza</option></select></div><div class="col s9"><div class="input-field col s12"><textarea class="materialize-textarea" id="subtarea' +
+                                  '"><option value="" disabled selected>Selecciona naturaleza</option></select></div><div class="col s8"><div class="input-field col s12"><textarea class="materialize-textarea" id="subtarea' +
                                   i.id +
                                   '"></textarea><label for="subtarea' +
                                   i.id +
-                                  '">Detalles de la acción</label></div></div><div class="col s1"><a href="#" class="waves-effect waves-light btn addSubtarea" idTarea="' +
+                                  '">Detalles de la acción</label></div></div><div class="col s2"><a href="#" class="waves-effect waves-light btn addSubtarea" idTarea="' +
                                   i.id +
                                   '">Enviar</a></div></div></li>'
                           ),
@@ -735,7 +735,7 @@ function listarEquiposAveriados() {
         }
     });
 }
-function actualizarEstadoEquipo() {
+function actualizarEstadoEqupo() {
     null != idEquipo &&
         jQuery.getJSON(URLAPI + "/equipos/equipo/" + idEquipo + "/detallado", function (a) {
             if (100 == a.codigo) {
@@ -779,7 +779,8 @@ var PSAsignado,
     litros_agua = null,
     idEquipo = null,
     PSActuales = 0,
-    URLAPI = "http://app.aqualyt.net:5002",
+    // URLAPI = "http://app.aqualyt.net:5002",
+    URLAPI = "http://192.168.150.112:5002", // DEV
     fecha = moment().format("DD[/]MM[/]YYYY"),
     fecha2 = moment().format("DD[/]MM[/]YYYY"),
     hoy = new Date(moment().format("YYYY[,]MM[,]DD")),
